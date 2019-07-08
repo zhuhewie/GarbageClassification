@@ -1,0 +1,158 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-android-extensions'
+
+
+// Creates a variable called keystorePropertiesFile, and initializes it to the
+// keystore.properties file.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initializes a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Loads the keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        applicationId "com.zz.garbageclassification"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true
+
+    }
+    // 如果在buildTypes 后边 会出现无法找到signingConfigs的bug
+    signingConfigs {
+        release {
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            multiDexKeepProguard file('multidex-config.pro')
+
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+        }
+        debug {
+            minifyEnabled true
+//            multiDexKeepFile file ('multidex-config.txt')
+            multiDexKeepProguard file('multidex-config.pro')
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //修改apk 的 文件名
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def date = new Date().format("yyyy-MM-dd hh:mm", TimeZone.getTimeZone("GMT+08"))
+            if (variant.buildType.name == "debug") {
+                output.outputFileName = "${date}_lajifenlei_v${android.defaultConfig.versionName}_debug_${android.defaultConfig.versionCode}.apk"
+            } else if (variant.buildType.name == "release") {
+                output.outputFileName = "${date}_lajifenlei_v${android.defaultConfig.versionName}_release_${android.defaultConfig.versionCode}.apk"
+            }
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+        additionalParameters += '--multi-dex'
+        additionalParameters += '--set-max-idx-number=35000'
+//每个包内方法数上限（根据实际项目配置这个数，来适配4.0-4.4一些低端机型，因为拆分的dex太大，这些低端机型加载不了dex）
+        additionalParameters += '--minimal-main-dex'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    //base
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["cardview"]
+
+//    implementation rootProject.ext.dependencies["support-v4"]
+    //    implementation rootProject.ext.dependencies["cardview-v7"]
+
+    //leakCanary
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:support-v4:26.1.0'
+    debugImplementation rootProject.ext.dependencies["leakcanary-android"]
+    releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
+    // Optional, if you use support library fragments:
+    debugImplementation rootProject.ext.dependencies["leakcanary-support-fragment"]
+
+    //view
+//    implementation rootProject.ext.dependencies["bottom-bar"]
+//    implementation rootProject.ext.dependencies["banner"]
+    implementation rootProject.ext.dependencies["smartrefresh"]
+//    implementation rootProject.ext.dependencies["MPAndroidChart"]
+    implementation rootProject.ext.dependencies["signature"]
+//    implementation rootProject.ext.dependencies["image-picker"]
+//    implementation rootProject.ext.dependencies["android-pickerview"]
+//    implementation rootProject.ext.dependencies["android-pdf-viewer"]
+
+    // 底部菜单
+//    implementation project(':FlycoTabLayout_Lib')
+    //图片选择
+//    implementation project(':imagepicker')
+
+//    implementation('com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar') {
+//        exclude group: 'com.android.support', module: 'support-v4'
+//    }
+
+    //rx
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["rxpermissions"]
+    implementation rootProject.ext.dependencies["rxbinding"]
+
+    //network
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp-logging-interceptor"]
+    implementation("com.github.bumptech.glide:glide:4.9.0") {
+        exclude group: "com.android.support"
+    }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation rootProject.ext.dependencies["glide-okhttp3-integration"]
+    kapt rootProject.ext.dependencies["glide"]
+    implementation rootProject.ext.dependencies["jsoup"]
+//    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation rootProject.ext.dependencies["conceal"]
+//    implementation rootProject.ext.dependencies["soloader"]
+    implementation rootProject.ext.dependencies["eventbus"]
+    //di
+    //    implementation rootProject.ext.dependencies["dagger"]
+    //    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    //    kapt rootProject.ext.dependencies["dagger-compiler"]
+    //    implementation rootProject.ext.dependencies["dagger-android"]
+    //    implementation rootProject.ext.dependencies["dagger-android-support"] // // if you use the support libraries
+    //    kapt rootProject.ext.dependencies["dagger-android-processor"]
+
+    implementation rootProject.ext.dependencies["easypermissions"]
+
+    api rootProject.ext.dependencies["multidex"]
+}
+androidExtensions {
+    experimental = true
+}

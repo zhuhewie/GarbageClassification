@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="black">#000000</color>
+    
+    <color name="colorTitleText">#000000</color> <!--主标题背景色-->
+    <color name="colorBackground">#f6f7fb</color><!--背景色-->
+    <color name="colorHintText">#bcbcbc</color>  <!--填写提示色-->
+    <color name="colorMainMess">#333333</color>  <!--主要信息-->
+    <color name="colorMess">#888888</color>  <!--次要信息-->
+    <color name="color_dddddd">#dddddd</color>
+    <color name="color_line">#e5e5e5</color> <!--分割线-->
+    <color name="color_waring">#fa4535</color> <!--错误,警示色-->
+    
+    
+    
+    <color name="color_100_000000">#ff000000</color> <!--%90不透明度-->
+    <color name="color_90_000000">#E6000000</color> <!--%90不透明度-->
+    <color name="color_80_000000">#CC000000</color> <!--%80不透明度-->
+    <color name="color_70_000000">#B3000000</color> <!--%70不透明度-->
+    <color name="color_60_000000">#99000000</color> <!--%60不透明度-->
+    <color name="color_50_000000">#80000000</color> <!--%50不透明度-->
+    <color name="color_40_000000">#66000000</color> <!--%40不透明度-->
+    <color name="color_30_000000">#4D000000</color> <!--%30不透明度-->
+    <color name="color_20_000000">#33000000</color> <!--%20不透明度-->
+    <color name="color_10_000000">#1A000000</color> <!--%10不透明度-->
+    <color name="color_5_000000">#0D000000</color> <!--%5不透明度-->
+    <color name="color_0_000000">#00000000</color> <!--%0不透明度-->
+    <color name="color_ffffff">#ffffff</color> <!--%不透明度-->
+    <color name="color_50_ffffff">#80ffffff</color> <!--%不透明度-->
+</resources>
