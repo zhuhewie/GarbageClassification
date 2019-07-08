@@ -8,20 +8,12 @@ import com.zz.garbageclassification.model.bean.response.PersonMaterResponse
 
 interface MainContract {
     interface View : IBaseView {
-        fun arbitratorMsg(msg: ArbitratorResponse)
-        fun getMsgError(errorMess : String)
-        fun menus(menusList : List<MenusResponse>)
-        fun getWechatNewsError(errorMess : String)
-        fun applyList(applyList : List<PersonMaterResponse>)
-        fun getApplyError(errorMess : String)
+        fun getError(errorMess : String)
+        fun getSucc(mess : String)
 
     }
 
     interface Presenter : IPresenter<View> {
-        fun getArbitratorMsg()
-        fun getMenus()
-        fun getApplyList()
-        fun getNews(length: String,current:String)
-        fun getWechatNews(length: String,current:String)
+        fun getGarbageClass(grabageName: String)
     }
 }

@@ -20,7 +20,6 @@ import okhttp3.ResponseBody
 
 class LoginModel {
 
-
     fun getGarbageClass(garbage:String) :Flowable<ResponseBody>{
         return RetrofitManager.loginService
 

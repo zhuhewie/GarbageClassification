@@ -6,9 +6,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.zz.garbageclassification.Grabage
 import com.zz.garbageclassification.R
+import com.zz.garbageclassification.base.BaseActivity
+import com.zz.garbageclassification.base.contract.main.MainContract
+import com.zz.garbageclassification.presenter.main.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() , MainContract.View{
+    private val mPresenter by lazy { MainPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,9 @@ class MainActivity : AppCompatActivity() {
      *
      */
     private fun addClick() {
+        btnClassif.setOnClickListener {
+            mPresenter.getGarbageClass(etGarbage.getText().toString())
+        }
 
         //输入垃圾名字
         etGarbage.addTextChangedListener(object : TextWatcher {
@@ -55,5 +62,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun getError(errorMess: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getSucc(mess: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
