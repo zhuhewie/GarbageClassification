@@ -13,6 +13,10 @@
     <color name="color_dddddd">#dddddd</color>
     <color name="color_line">#e5e5e5</color> <!--分割线-->
     <color name="color_waring">#fa4535</color> <!--错误,警示色-->
+    <color name="color_recy">#3333cc</color>
+    <color name="color_harmful">#ff0000</color>
+    <color name="color_wet">#00868B</color>
+    <color name="color_dry">#339933</color>
     
     
     

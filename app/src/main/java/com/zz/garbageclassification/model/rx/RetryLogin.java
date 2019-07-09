@@ -64,14 +64,14 @@ public class RetryLogin implements Function<Flowable<Throwable>, Publisher<?>> {
 
                                 }
                                 //返回体信息不为空 并且,返回体message 包含"令牌失效"字段,重新登录
-                                if (!TextUtils.isEmpty(errString) && errString.contains("令牌失效")) {
-                                    List<String> userArray = AppUtils.Companion.getUserIdPwd();
-                                    if (userArray == null || userArray.size() != 2) return Flowable.error(throwable);
-                                    String userID = userArray.get(0);
-                                    String userPassword = userArray.get(1);
-                                    LoginModel loginModel = new LoginModel();
-                                    return loginModel.loginByAccount(userID, userPassword);
-                                }
+//                                if (!TextUtils.isEmpty(errString) && errString.contains("令牌失效")) {
+//                                    List<String> userArray = AppUtils.Companion.getUserIdPwd();
+//                                    if (userArray == null || userArray.size() != 2) return Flowable.error(throwable);
+//                                    String userID = userArray.get(0);
+//                                    String userPassword = userArray.get(1);
+//                                    LoginModel loginModel = new LoginModel();
+//                                    return loginModel.loginByAccount(userID, userPassword);
+//                                }
                             }
                         }
                         return Flowable.error(throwable);

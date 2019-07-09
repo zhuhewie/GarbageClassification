@@ -1,20 +1,11 @@
 package com.zz.garbageclassification.view.main
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
-import com.zz.garbageclassification.Constants
 import com.zz.garbageclassification.R
 import com.zz.garbageclassification.base.RootActivity
-import com.zz.garbageclassification.model.bean.Token
 import com.zz.garbageclassification.model.http.model.LoginModel
-import com.zz.garbageclassification.util.AppUtils
-import com.zz.garbageclassification.util.ConcealUtil
-import com.zz.garbageclassification.util.SPUtil
-import com.zz.garbageclassification.view.login.LoginActivity
 import io.reactivex.Observable
 import io.reactivex.functions.Consumer
 import pub.devrel.easypermissions.EasyPermissions
@@ -48,7 +39,6 @@ class SplashActivity : RootActivity(), EasyPermissions.PermissionCallbacks {
         )
 
         if (EasyPermissions.hasPermissions(this, *perms)) {
-            checkToken()
             startMain()
         } else {
 
@@ -76,7 +66,6 @@ class SplashActivity : RootActivity(), EasyPermissions.PermissionCallbacks {
                 ) {
                 }
 
-                checkToken()
                 startMain()
             }
         }
@@ -85,13 +74,7 @@ class SplashActivity : RootActivity(), EasyPermissions.PermissionCallbacks {
     fun startMain() {
         val disposable = Observable.timer(3, SECONDS)
             .subscribe(Consumer {
-                var intent: Intent?
-                if (Token.instance.isLogin()) {
-                    intent = Intent(this, Main2Activity::class.java)
-                } else {
-                    intent = Intent(this, LoginActivity::class.java)
-
-                }
+                var intent: Intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             })
@@ -101,43 +84,4 @@ class SplashActivity : RootActivity(), EasyPermissions.PermissionCallbacks {
         super.onDestroy()
     }
 
-    /**
-     * 自动登录
-     */
-    @SuppressLint("CheckResult")
-    fun autoLogin() {
-        val list = AppUtils.getUserIdPwd()
-        if (list.isEmpty() || list.size != 2) return
-        val userID = list[0]
-        val userPassword = list[1]
-        loginModel.login(userID, userPassword).subscribe({
-            Log.d(TAG, "账号密码自动登录成功")
-        }, {
-            SPUtil.getInstance().putString(Constants.TOKEN,"")
-            Token.instance.refresh()
-            Log.e(TAG, "账号密码自动登录失败 ${it.message}")
-        })
-    }
-
-    fun checkToken() {
-        Token.instance.refresh()
-        if (Token.instance.isLogin()) { //sp文件中有缓存的token //验证token是否过期
-            Token.instance.accessToken?.let {
-                loginModel.checkToken(it)
-                    .subscribe({ tokenMsg ->
-                        if (!TextUtils.isEmpty(tokenMsg.message) && tokenMsg.message.equals("令牌有效")) {
-                            // 登录成功
-                        } else {
-                            autoLogin()
-                        }
-                    }, {
-                        autoLogin()
-                    })
-            }
-
-        } else {
-            autoLogin()
-        }
-
-    }
 }

@@ -1,4 +1,4 @@
-package com.zz.garbageclassification.view.main.dialog
+package com.arbitratorapp.view.custom
 
 import android.content.Context
 import android.os.Bundle
@@ -8,19 +8,18 @@ import android.view.*
 import com.zz.garbageclassification.R
 import kotlinx.android.synthetic.main.dialog_sign.*
 
-private const val ARG_ADDRESS = "address"
+private const val TITLE_TEXT = "title_text"
 
 /**
- * 确认签名的dialog
+ * 项目中通用提示框
  *
  */
-class SignDialog : DialogFragment() {
+class YjDialog : DialogFragment() {
+    private var titleText: String? = null
     private var listenter :OnClickListenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            address = it.getParcelable<AddressResponse>(ARG_ADDRESS)
-//        } ?: dismiss()
+        titleText = arguments?.getString(TITLE_TEXT)?:"是否确认!"
     }
 
     override fun onCreateView(
@@ -28,15 +27,7 @@ class SignDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.dialog_sign, container, false)
-//        dialog?.window?.apply {
-//            setBackgroundDrawableResource(R.color.trans)
-//            decorView.setPadding(0,0,0,0)
-//            attributes = attributes?.apply {
-//                gravity = Gravity.CENTER
-//                width = WindowManager.LayoutParams.WRAP_CONTENT
-//                height = WindowManager.LayoutParams.WRAP_CONTENT
-//            }
-//        }
+        tvDialogTitle.setText(titleText)
         return view
     }
 
@@ -80,15 +71,12 @@ class SignDialog : DialogFragment() {
     companion object {
         /**
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddressSelectDialog.
          */
         @JvmStatic
-        fun newInstance() =
-            SignDialog().apply {
+        fun newInstance(titleText : String) =
+            YjDialog().apply {
                 arguments = Bundle().apply {
-//                    putParcelable(ARG_ADDRESS, address)
+                    putString(TITLE_TEXT, titleText)
                 }
             }
     }

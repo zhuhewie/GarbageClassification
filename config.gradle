@@ -95,7 +95,8 @@ ext {
 //            "logger"                    : "com.orhanobut:logger:1.15",
 //            "fragmentation"             : "me.yokeyword:fragmentation:0.10.4",
 //            "crashreport"               : "com.tencent.bugly:crashreport:latest.release",
-            "eventbus"               : "org.greenrobot:eventbus:3.1.1",
+            "eventbus"                  : "org.greenrobot:eventbus:3.1.1",
+            "walle"                     : "com.meituan.android.walle:library:1.1.6",
 
             //canary
 //            "blockcanary-android"       : "com.github.moduth:blockcanary-android:${dependVersion.blockcanary}",
@@ -103,6 +104,7 @@ ext {
             "leakcanary-android"        : "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}",
             "leakcanary-android-no-op"  : "com.squareup.leakcanary:leakcanary-android-no-op:${dependVersion.leakcanary}",
             "leakcanary-support-fragment"  : "com.squareup.leakcanary:leakcanary-support-fragment:${dependVersion.leakcanary}"
+
     ]
 
 }

@@ -6,7 +6,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import com.zz.garbageclassification.app.App
-import com.zz.garbageclassification.model.bean.Token
 import com.zz.garbageclassification.model.http.HttpUrl
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
@@ -79,7 +78,7 @@ object ImageUtil {
 
         return GlideUrl(
             imgUrl, LazyHeaders.Builder()
-                .addHeader("Authorization", Token.instance.getBeareeToken())
+//                .addHeader("Authorization", Token.instance.getBeareeToken())
                 .build()
         )
     }

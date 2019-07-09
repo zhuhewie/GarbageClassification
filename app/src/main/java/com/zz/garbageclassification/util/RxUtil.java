@@ -2,7 +2,6 @@ package com.zz.garbageclassification.util;
 
 import android.text.TextUtils;
 import android.util.Log;
-import com.zz.garbageclassification.model.bean.Token;
 import com.zz.garbageclassification.model.http.ApiException;
 import com.google.gson.JsonObject;
 import io.reactivex.*;
@@ -144,6 +143,9 @@ public class RxUtil {
      */
     public static String handleResult(Throwable throwable) {
         try {
+            if (throwable instanceof ApiException) {
+                return httpErrorCodeMess(((ApiException) throwable).getCode(), ((ApiException) throwable).getMessage());
+            }
             if (throwable instanceof HttpException) {
 
                 ResponseBody errBody = ((HttpException) throwable).response().errorBody();
@@ -269,7 +271,7 @@ public class RxUtil {
         return new Callable<Flowable<String>>() {
             @Override
             public Flowable<String> call() throws Exception {
-                return Flowable.just(Token.Companion.getInstance().getBeareeToken());
+                return Flowable.just("");
             }
         };
     }

@@ -10,13 +10,10 @@ import android.view.View
 import android.webkit.*
 import com.zz.garbageclassification.R
 import com.zz.garbageclassification.base.BaseActivity
-import com.zz.garbageclassification.model.bean.Token
 import com.zz.garbageclassification.model.bean.main.WebFunBean
 import com.zz.garbageclassification.model.http.HttpUrl
 import com.zz.garbageclassification.util.FileUtil
 import com.zz.garbageclassification.util.StartUtil
-import com.zz.garbageclassification.view.custom.topsnackbar.YJSnackbar
-import com.github.mikephil.charting.utils.FileUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -90,7 +87,7 @@ class WebActivity : BaseActivity() {
             .setAcceptThirdPartyCookies(webView,true)
         }
 
-        token["Authorization"] = Token.instance.getBeareeToken()
+//        token["Authorization"] = Token.instance.getBeareeToken()
         webView.settings.setAppCacheEnabled(true)
 
 
@@ -113,58 +110,58 @@ class WebActivity : BaseActivity() {
         fun1Data?.apply {
             when(funType) {
                 1 -> {
-                    val intent = Intent(this@WebActivity, WebActivity::class.java)
-                    intent.putExtra(WebActivity.WEB_TITLE,"证书详情")
-                    intent.putExtra(WebActivity.WEB_URL, HttpUrl.ECERTIFI_DETAIL)
-                    StartUtil.startActivity(this@WebActivity,intent)
+//                    val intent = Intent(this@WebActivity, WebActivity::class.java)
+//                    intent.putExtra(WebActivity.WEB_TITLE,"证书详情")
+//                    intent.putExtra(WebActivity.WEB_URL, HttpUrl.ECERTIFI_DETAIL)
+//                    StartUtil.startActivity(this@WebActivity,intent)
                 }
             }
         }
     }
     fun funTwo(){
-        fun2Data?.apply {
-            when(funType) {
-                2 -> {
-                    try {//截图
-                        Log.d(TAG,"创建线程 ${Thread.currentThread().name}")
-                        Observable
-                            .create<Int> {
-                                Log.d(TAG,"发射线程 ${Thread.currentThread().name}")
-                                val bitmap = webView.drawingCache
-                                val fls =
-                                    FileOutputStream(
-                                        File(
-                                            FileUtil.getEcertificate(),
-                                            "${System.currentTimeMillis()}.png"
-                                        )
-                                    )
-                                val result = bitmap.compress(Bitmap.CompressFormat.PNG, 70, fls)
-                                if (!result) {
-                                    it.onError(Exception("保存图片失败"))
-                                } else {
-                                    it.onNext(1)
-                                }
-                                fls.flush()
-                                fls.close()
-                                bitmap.recycle()
-
-                            }
-                            .subscribeOn(Schedulers.computation())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({
-                                Log.d(TAG, "接受线程 ${Thread.currentThread().name}")
-                                YJSnackbar.make(tvFun2, "图片下载成功", YJSnackbar.LENGTH_SHORT).show()
-                            }, {
-                                Log.d(TAG, "接受线程 ${Thread.currentThread().name}")
-                                YJSnackbar.make(tvFun2, "下载失败", YJSnackbar.LENGTH_SHORT).show()
-                            })
-                        //后续可能需要添加压缩方法
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-            }
-        }
+//        fun2Data?.apply {
+//            when(funType) {
+//                2 -> {
+//                    try {//截图
+//                        Log.d(TAG,"创建线程 ${Thread.currentThread().name}")
+//                        Observable
+//                            .create<Int> {
+//                                Log.d(TAG,"发射线程 ${Thread.currentThread().name}")
+//                                val bitmap = webView.drawingCache
+//                                val fls =
+//                                    FileOutputStream(
+//                                        File(
+//                                            FileUtil.getEcertificate(),
+//                                            "${System.currentTimeMillis()}.png"
+//                                        )
+//                                    )
+//                                val result = bitmap.compress(Bitmap.CompressFormat.PNG, 70, fls)
+//                                if (!result) {
+//                                    it.onError(Exception("保存图片失败"))
+//                                } else {
+//                                    it.onNext(1)
+//                                }
+//                                fls.flush()
+//                                fls.close()
+//                                bitmap.recycle()
+//
+//                            }
+//                            .subscribeOn(Schedulers.computation())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe({
+//                                Log.d(TAG, "接受线程 ${Thread.currentThread().name}")
+//                                YJSnackbar.make(tvFun2, "图片下载成功", YJSnackbar.LENGTH_SHORT).show()
+//                            }, {
+//                                Log.d(TAG, "接受线程 ${Thread.currentThread().name}")
+//                                YJSnackbar.make(tvFun2, "下载失败", YJSnackbar.LENGTH_SHORT).show()
+//                            })
+//                        //后续可能需要添加压缩方法
+//                    } catch (e: Exception) {
+//                        e.printStackTrace()
+//                    }
+//                }
+//            }
+//        }
     }
 
 

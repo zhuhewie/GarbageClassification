@@ -2,6 +2,7 @@ package com.zz.garbageclassification.presenter.main
 
 import android.util.Log
 import com.zz.garbageclassification.base.BasePresenter
+import com.zz.garbageclassification.base.contract.main.FeedbackContract
 import com.zz.garbageclassification.base.contract.main.MainContract
 import com.zz.garbageclassification.model.http.model.LoginModel
 import com.zz.garbageclassification.util.RxUtil
@@ -14,22 +15,20 @@ import com.zz.garbageclassification.util.RxUtil
  * <p> 版本号 : 1 <p>
  *
  */
-class MainPresenter : BasePresenter<MainContract.View>(), MainContract.Presenter {
+class FeedbackPresenter : BasePresenter<FeedbackContract.View>(), FeedbackContract.Presenter {
     private val mainModel by lazy { LoginModel() }
-    private val TAG :String = "MainPresenter"
-    override fun getGarbageClass(grabageName: String) {
+    private val TAG :String = "FeedbackPresenter"
+    override fun commitGarbageClass(grabageName: String,classifName :String) {
         addSubscription(
-            mainModel.getGarbageClass(grabageName)
+            mainModel.commitGarbageClass(grabageName,classifName)
                 .subscribe({
                     Log.e(TAG,"${it.toString()}")
                     mRootView?.apply {
-                        getSucc(it)
                     }
 
                 }, {
                     Log.e(TAG,"${it.message}")
                     mRootView?.apply {
-                        getError(RxUtil.handleResult(it))
                     }
 
                 })

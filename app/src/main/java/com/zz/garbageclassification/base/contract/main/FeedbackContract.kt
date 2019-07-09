@@ -4,14 +4,14 @@ import com.zz.garbageclassification.base.IBaseView
 import com.zz.garbageclassification.base.IPresenter
 import com.zz.garbageclassification.model.bean.response.GarbageResponse
 
-interface MainContract {
+interface FeedbackContract {
     interface View : IBaseView {
-        fun getError(errorMess : String)
-        fun getSucc(grabage : GarbageResponse)
+        fun commitError(errorMess : String)
+        fun commitSucc(grabage : String)
 
     }
 
     interface Presenter : IPresenter<View> {
-        fun getGarbageClass(grabageName: String)
+        fun commitGarbageClass(grabageName: String,classifName :String)
     }
 }

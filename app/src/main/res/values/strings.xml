@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">GarbageClassification</string>
+    <string name="app_name">垃圾分类</string>
+    
+    <!--通用-->
+    <string name="next">下一步</string>
+    <string name="back">返回</string>
+    <string name="complete">完成</string>
+    <string name="submit">提交</string>
+    <string name="version_name">版本号</string>
+    <string name="cancle">取消</string>
+    <string name="exit">退出</string>
+    <string name="confirm">确定</string>
+    <string name="please_input">请填写</string>
+    <string name="please_pick">请选择</string>
+    <string name="agree">同意</string>
+    <string name="save">保存</string>
+
+
 </resources>

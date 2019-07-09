@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="vericationCodeInput">
+
+        <attr name="box" format="integer" />
+        <attr name="child_h_padding" format="dimension"/>
+        <attr name="child_v_padding" format="dimension"/>
+        <attr name="child_width" format="dimension"/>
+        <attr name="child_height" format="dimension"/>
+        <attr name="padding" format="dimension"/>
+        <attr name="box_bg_focus" format="reference"/>
+        <attr name="box_bg_normal" format="reference"/>
+        <attr name="inputType" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="MultipleStatusView">
+        <attr name="loadingView" format="reference"/>
+        <attr name="errorView" format="reference"/>
+        <attr name="emptyView" format="reference"/>
+        <attr name="noNetworkView" format="reference"/>
+        <attr name="contentView" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="title">
+
+        <attr name="title" format="string" />
+        <attr name="right_text" format="string"/>
+        <attr name="show_right" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="infoView">
+
+        <attr name="info_name" format="string" />
+        <attr name="info_person_name" format="string"/>
+        <attr name="info_person_sex" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="infoTitleView">
+        <attr name="info_title_name" format="string" />
+        <attr name="info_title_right_src" format="reference" />
+        <attr name="info_title_show_right" format="boolean" />
+        <attr name="info_title_bottomline" format="boolean" />
+        <attr name="info_title_show_bottomline" format="boolean" />
+
+    </declare-styleable>
+    <declare-styleable name="updateMsgItem">
+        <attr name="update_name" format="string" />
+        <attr name="update_editable" format="boolean" />
+        <attr name="update_tip" format="string" />
+        <attr name="update_can_empty" format="boolean"/>
+        <attr name="update_show_right" format="boolean" />
+
+    </declare-styleable>
+    <declare-styleable name="updateAudit">
+        <attr name="audit" format="string" />
+    </declare-styleable>
+    <declare-styleable name="msgItem">
+        <attr name="msg_item_add_text" format="string" />
+        <attr name="msg_item_right_src" format="reference" />
+        <attr name="msg_item_name" format="string" />
+        <attr name="msg_item_show_right" format="boolean" />
+        <attr name="msg_item_show_bottomline" format="boolean" />
+        <attr name="msg_item_audit" format="string" />
+
+    </declare-styleable>
+    <declare-styleable name="imgPickView">
+        <attr name="max" format="integer" />
+        <attr name="tips" format="string" />
+
+    </declare-styleable>
+    <declare-styleable name="contactView">
+
+        <attr name="contact_title" format="string" />
+    </declare-styleable>
+    <declare-styleable name="addMsgView">
+        <attr name="add_text" format="string" />
+    </declare-styleable>
+</resources>
